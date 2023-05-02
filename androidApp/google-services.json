@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "816100427126",
+    "project_id": "fir-todo-kmm",
+    "storage_bucket": "fir-todo-kmm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816100427126:android:82e37d3a574d00f382a657",
+        "android_client_info": {
+          "package_name": "com.gthio.todokmmsandbox.shared"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816100427126-umqofd4l15o30i6t7dtfg3ngd04r6v4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRG51LVpRPpznHFBlpSt5O7Ga7y4n8IH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816100427126-umqofd4l15o30i6t7dtfg3ngd04r6v4s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "816100427126-hma3q95joiosms631daqebgqvbkbhkdr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gthio.kmmfirestore"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816100427126:android:6fc397fac90bda6382a657",
+        "android_client_info": {
+          "package_name": "com.gthio.todosandboxkmm.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816100427126-umqofd4l15o30i6t7dtfg3ngd04r6v4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRG51LVpRPpznHFBlpSt5O7Ga7y4n8IH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816100427126-umqofd4l15o30i6t7dtfg3ngd04r6v4s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "816100427126-hma3q95joiosms631daqebgqvbkbhkdr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gthio.kmmfirestore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

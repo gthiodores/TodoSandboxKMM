@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">816100427126-umqofd4l15o30i6t7dtfg3ngd04r6v4s.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">816100427126</string>
+    <string name="google_api_key" translatable="false">AIzaSyCRG51LVpRPpznHFBlpSt5O7Ga7y4n8IH8</string>
+    <string name="google_app_id" translatable="false">1:816100427126:android:6fc397fac90bda6382a657</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCRG51LVpRPpznHFBlpSt5O7Ga7y4n8IH8</string>
+    <string name="google_storage_bucket" translatable="false">fir-todo-kmm.appspot.com</string>
+    <string name="project_id" translatable="false">fir-todo-kmm</string>
+</resources>
