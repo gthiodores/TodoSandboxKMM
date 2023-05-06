@@ -12,18 +12,14 @@ struct AboutView: View {
     let onBack: () -> Void
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .center) {
-                Text("About app")
-            }
-            .navigationTitle("About")
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    Button(action: onBack, label: { Text("Back") })
-                }
-            }
-            .navigationViewStyle(.stack)
+        VStack(alignment: .center) {
+            Text("About app")
         }
+        .frame(maxHeight: .infinity)
+        .appBar(
+            title: "About",
+            navigation: { Button(action: onBack, label: { Text("Back") }) }
+        )
     }
 }
 

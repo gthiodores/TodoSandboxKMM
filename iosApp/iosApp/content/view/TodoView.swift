@@ -14,22 +14,21 @@ struct TodoView: View {
     @StateObject var componentWrapper : TodoComponentWrapper
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(componentWrapper.uiState.items, id: \.uuid.uuidString) { item in
-                    TodoItemView(todo: item)
-                }
+        List {
+            ForEach(componentWrapper.uiState.items, id: \.uuid.uuidString) { item in
+                TodoItemView(todo: item)
             }
-            .navigationTitle("Todo")
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: toAbout) {
-                        Text("About")
-                    }
-                }
-            }
-            .navigationViewStyle(.stack)
         }
-        
+        .listStyle(.plain)
+        .frame(maxHeight: .infinity)
+        .appBar(
+            title: "Todo List",
+            action: {
+                Button(
+                    action: toAbout,
+                    label: { Text("About") }
+                )                
+            }
+        )
     }
 }

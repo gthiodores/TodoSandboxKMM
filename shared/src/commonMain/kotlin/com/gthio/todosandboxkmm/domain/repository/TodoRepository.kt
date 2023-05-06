@@ -2,6 +2,8 @@ package com.gthio.todosandboxkmm.domain.repository
 
 import arrow.core.Either
 import com.gthio.todosandboxkmm.domain.model.TodoItem
+import com.gthio.todosandboxkmm.domain.paging.Pager
+import dev.gitlive.firebase.firestore.Query
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -13,6 +15,16 @@ interface TodoRepository {
      * @return A flow of the list of todo items.
      */
     fun observeTodoList(): Flow<List<TodoItem>>
+
+    /**
+     * Paginate the list of todo items.
+     * @return A paged flow of the list of todo items.
+     *
+     * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data)
+     */
+//    fun observeTodoPaging(scope: CoroutineScope): Flow<PagingData<TodoItem>>
+
+    fun observeCustomPaging(): Pager<Query, TodoItem>
 
     /**
      * Add a todo item to the list.

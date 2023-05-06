@@ -20,6 +20,9 @@ dependencyResolutionManagement {
             version("native-coroutine", "1.0.0-ALPHA-7")
             version("firebase-kmm", "1.8.1")
             version("koin", "3.2.0")
+            version("paging", "3.1.1")
+            version("paging-compose", "1.0.0-alpha19")
+            version("paging-kmm", "0.6.1")
 
             library("mvi-core", "com.arkivanov.mvikotlin", "mvikotlin").versionRef("mvi-kotlin")
             library("mvi-main", "com.arkivanov.mvikotlin", "mvikotlin-main").versionRef("mvi-kotlin")
@@ -52,6 +55,10 @@ dependencyResolutionManagement {
             library("koin-test", "io.insert-koin", "koin-test").versionRef("koin")
             library("koin-android", "io.insert-koin", "koin-android").versionRef("koin")
             bundle("koin", listOf("koin-core", "koin-test", "koin-android"))
+
+            library("paging-android", "androidx.paging", "paging-runtime").versionRef("paging")
+            library("paging-compose", "androidx.paging", "paging-compose").versionRef("paging-compose")
+            library("paging-kmm", "io.github.kuuuurt", "multiplatform-paging").versionRef("paging-kmm")
         }
     }
 }

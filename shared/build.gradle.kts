@@ -50,6 +50,7 @@ kotlin {
                 api(libs.bundles.kmm.firebase.bundle)
                 api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
                 api(libs.koin.core)
+                api("org.lighthousegames:logging:1.3.0")
             }
         }
         val commonTest by getting {

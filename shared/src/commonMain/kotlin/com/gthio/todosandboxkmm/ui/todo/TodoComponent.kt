@@ -30,6 +30,14 @@ class TodoComponent(
     repository: TodoRepository,
 ) : ComponentContext by componentContext {
     private val store = instanceKeeper.getStore { TodoStoreFactory(factory, repository).create() }
+//    private val pager = instanceKeeper.getOrCreate("Pager") {
+//        Pager(
+//            clientScope = CoroutineScope(SupervisorJob() + Dispatchers.Main),
+//            config = ,
+//            initialKey = ,
+//            getItems = {  },
+//        )
+//    }
 
     /**
      * This is the state of the TodoStore, which is a StateFlow.
@@ -37,6 +45,10 @@ class TodoComponent(
     @NativeCoroutinesState
     val uiState: StateFlow<TodoState>
         get() = store.stateFlow
+
+    init {
+        loadNext()
+    }
 
     /**
      * This is a function that will be called when the body of the Todo field is updated.
@@ -57,6 +69,10 @@ class TodoComponent(
      */
     fun onAddTodo() {
         store.accept(TodoIntent.AddTodo)
+    }
+
+    fun loadNext() {
+        store.accept(TodoIntent.LoadTodo)
     }
 
     /**

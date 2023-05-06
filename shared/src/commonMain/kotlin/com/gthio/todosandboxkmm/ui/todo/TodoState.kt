@@ -16,10 +16,11 @@ import com.gthio.todosandboxkmm.domain.model.TodoItem
  * @see ColorCode
  */
 data class TodoState(
-    val items: List<TodoItem> = listOf(),
+    val items: List<TodoItem> = emptyList(),
     val title: String = "",
     val body: String = "",
     val colorCode: ColorCode = ColorCode.WHITE,
+    val exhausted: Boolean = false,
 ) {
     val canAddTodo: Boolean
         get() = title.isNotBlank() && body.isNotBlank()

@@ -2,8 +2,10 @@ package com.gthio.todosandboxkmm.android.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -16,13 +18,29 @@ import androidx.compose.ui.unit.dp
 import com.gthio.todosandboxkmm.domain.model.ColorCode
 import com.gthio.todosandboxkmm.domain.model.TodoItem
 import com.gthio.todosandboxkmm.ui.todo.TodoComponent
+import org.lighthousegames.logging.logging
 
 @Composable
 fun TodoRoute(
     onAbout: () -> Unit,
     todoComponent: TodoComponent,
 ) {
+    val log = logging("TodoRoute")
+
     val uiState by todoComponent.uiState.collectAsState()
+
+    // TODO: Fix issue with loading next page
+    val listState = rememberLazyListState()
+
+//    LaunchedEffect(listState) {
+//        snapshotFlow { listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -9 }
+//            .collect { index ->
+//                log.d { "Collecting : $index" }
+//                if (index >= uiState.items.items.size - 4 && uiState.items.loadStatus == PagingLoadStatus.Success) {
+//                    todoComponent.loadNext()
+//                }
+//            }
+//    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -45,9 +63,11 @@ fun TodoRoute(
         ) {
             TodoList(
                 modifier = Modifier.weight(1f),
+                lazyState = listState,
                 onItemClicked = {
                     // Do Nothing For Now
                 },
+//                items = uiState.items.items,
                 items = uiState.items,
             )
 
@@ -98,13 +118,19 @@ fun TodoRoute(
 }
 
 @Composable
-fun TodoList(modifier: Modifier, onItemClicked: (TodoItem) -> Unit, items: List<TodoItem>) {
+fun TodoList(
+    modifier: Modifier,
+    lazyState: LazyListState = rememberLazyListState(),
+    onItemClicked: (TodoItem) -> Unit,
+    items: List<TodoItem>
+) {
     LazyColumn(
         modifier = modifier,
+        state = lazyState,
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
     ) {
-        items(items = items) { item ->
+        items(items) { item ->
             TodoItemView(onItemClicked = onItemClicked, item = item)
         }
     }

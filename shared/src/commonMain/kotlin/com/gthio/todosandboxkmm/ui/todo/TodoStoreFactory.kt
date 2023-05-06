@@ -17,6 +17,10 @@ internal class TodoStoreFactory(
     private val storeFactory: StoreFactory,
     private val repository: TodoRepository,
 ) {
+
+    /**
+     * Creates a new [TodoStore].
+     */
     fun create(): TodoStore {
         return object : TodoStore, Store<TodoIntent, TodoState, Nothing> by storeFactory.create(
             name = "Todo Store",
@@ -40,28 +44,43 @@ internal class TodoStoreFactory(
     /**
      * A [CoroutineExecutor] that handles [TodoIntent]s and Actions.
      */
-    private inner class TodoExecutor : CoroutineExecutor<TodoIntent, Unit, TodoState, Message, Nothing>() {
+    private inner class TodoExecutor :
+        CoroutineExecutor<TodoIntent, Unit, TodoState, Message, Nothing>() {
+
+//        private val pager: Pager<Query, TodoItem> = repository.observeCustomPaging()
+
+        override fun executeAction(action: Unit, getState: () -> TodoState) {
+//            pager
+//                .state
+//                .onEach { pagingState -> dispatch(Message.TodoListUpdated(pagingState)) }
+//                .launchIn(scope)
+            repository
+                .observeTodoList()
+                .onEach { todoList -> dispatch(Message.TodoListUpdated(todoList)) }
+                .launchIn(scope)
+        }
+
         override fun executeIntent(intent: TodoIntent, getState: () -> TodoState) {
             when (intent) {
                 TodoIntent.AddTodo -> addTodo(getState())
                 is TodoIntent.UpdateBodyField -> dispatch(Message.BodyUpdated(intent.value))
                 is TodoIntent.UpdateTitleField -> dispatch(Message.TitleUpdated(intent.value))
                 is TodoIntent.UpdateColor -> dispatch(Message.ColorUpdated(intent.value))
+                TodoIntent.LoadTodo -> {
+//                    scope.launch { pager.loadNext() }
+                }
             }
-        }
-
-        override fun executeAction(action: Unit, getState: () -> TodoState) {
-            repository
-                .observeTodoList()
-                .onEach { items -> dispatch(Message.TodoListUpdated(items)) }
-                .launchIn(scope)
         }
 
         /**
          * Adds a new [TodoItem] to the repository.
          */
         private fun addTodo(state: TodoState) {
-            val todo = TodoItem(title = state.title, content = state.body, colorCode = state.colorCode)
+            val todo = TodoItem(
+                title = state.title,
+                content = state.body,
+                colorCode = state.colorCode,
+            )
             scope.launch { repository.addTodoItem(todoItem = todo) }
         }
     }
@@ -72,7 +91,7 @@ internal class TodoStoreFactory(
     private object TodoReducer : Reducer<TodoState, Message> {
         override fun TodoState.reduce(msg: Message): TodoState {
             return when (msg) {
-                is Message.TodoListUpdated -> copy(items = msg.items)
+                is Message.TodoListUpdated -> copy(items = msg.items, exhausted = msg.items.isEmpty())
                 is Message.BodyUpdated -> copy(body = msg.value)
                 is Message.TitleUpdated -> copy(title = msg.value)
                 is Message.ColorUpdated -> copy(colorCode = msg.colorCode)
